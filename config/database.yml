@@ -1,0 +1,21 @@
+connection: &connection
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  host: localhost
+  username: postgres
+
+development:
+  <<: *connection
+  database: one_auth_development
+  password: <%= ENV['database_password'] %>
+
+test:
+  <<: *connection
+  database: one_auth_test
+  password: <%= ENV['database_password'] %>
+
+production:
+  <<: *connection
+  database: one_auth_production  
+  password: <%= ENV['database_password'] %>
