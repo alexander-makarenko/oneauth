@@ -1,0 +1,20 @@
+- if current_user.admin?
+  %li
+    = link_to users_path do
+      %span.glyphicon.glyphicon-list-alt
+      = t('v.layouts._header.nav_links.users')
+
+%li.dropdown
+  = link_to '#', class: 'dropdown-toggle', id: 'account-dropdown', data: { toggle: 'dropdown' }, role: 'button' do
+    #user-name= current_user.full_name    
+    %span.caret
+  %ul.dropdown-menu{ 'aria-labelledby': 'accountDropdown' }
+    %li
+      = link_to account_path do
+        %span.glyphicon.glyphicon-cog
+        Account
+    %li.divider{ role: 'separator' }
+    %li
+      = link_to signout_path, method: :delete do
+        %span.glyphicon.glyphicon-log-out
+        Sign out

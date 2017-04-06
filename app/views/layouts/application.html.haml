@@ -1,0 +1,11 @@
+!!!
+%html
+  = render 'layouts/head'
+  %body
+    = render 'layouts/header'
+    = render 'layouts/flash'
+    .container
+      .row.main
+        .col-xs-12
+          = yield
+    = render 'layouts/footer'

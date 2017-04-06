@@ -12,5 +12,32 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap-sprockets
 //= require turbolinks
 //= require_tree .
+
+function showFlash(html) {
+  $(html).insertAfter('header');
+}
+
+// make flash messages appear with a slide-down and disappear after a timeout
+function animateFlash() {
+  var $flash = $('.alert:not(.validation-errors):not(.important)');
+  if ($flash.length)
+    $flash.hide().delay(700).slideDown(150).delay(4000).slideUp(150, function() {
+      $(this).remove();
+    });
+}
+
+// fade out and remove any flash messages currently on-screen
+function removeFlash() {
+  var $flash = $('.alert:not(.validation-errors):not(.important)');
+  if ($flash.length)
+    $flash.stop(true).fadeOut(200, function() {
+      $(this).remove();
+    });
+}
+
+$(document).on('turbolinks:load', function() {
+  animateFlash();
+});

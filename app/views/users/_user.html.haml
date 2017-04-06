@@ -1,0 +1,5 @@
+%tr{ class: 'clickable-row', 'data-href': user_path(id: user.id) }
+  %td= user.id
+  %td= user.full_name
+  %td= user.email
+  %td= user.created_at.localtime.strftime('%b %-d %Y, %I:%M:%S %p')

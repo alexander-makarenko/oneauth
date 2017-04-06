@@ -1,0 +1,7 @@
+- errors = obj.errors.full_messages
+- unless errors.empty?  
+  %div{ class: 'alert alert-danger validation-errors', role: 'alert' }
+    - errors.each do |error|
+      - error[0] = error[0].capitalize.to_s
+      = error
+      %br

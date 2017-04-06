@@ -19,6 +19,7 @@ gem 'bootstrap-sass'
 gem 'bootstrap-will_paginate'
 gem 'pundit'
 gem 'figaro'
+gem 'faker'
 gem 'bcrypt', '~> 3.1.7'
 
 # Use Capistrano for deployment

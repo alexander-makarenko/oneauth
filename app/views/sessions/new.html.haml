@@ -1,0 +1,15 @@
+%h2.text-center Log In
+
+.col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3
+  = form_tag login_path, class: 'center-block' do |f|
+    .form-group
+      = label_tag :email
+      = text_field_tag :email, nil, class: 'form-control'
+    .form-group
+      = label_tag :password
+      = password_field_tag :password, nil, class: 'form-control'
+    .form-group
+      = label_tag :keep_signed_in, 'Remember'
+      = check_box_tag :keep_signed_in    
+    .form-group
+      = submit_tag 'Log In', class: 'btn btn-default btn-primary'

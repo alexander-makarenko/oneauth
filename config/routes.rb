@@ -1,3 +1,18 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root 'static_pages#home'
+
+  scope controller: :sessions do    
+    get    'login'   => :new
+    post   'login'   => :create
+    delete 'signout' => :destroy
+  end
+
+  resources :users, except: [:new]
+
+  scope controller: :users do
+    get   'register' => :new, as: 'signup'   
+    get   'account'  => :show
+    get   'settings' => :edit
+    patch 'account'  => :update
+  end
 end

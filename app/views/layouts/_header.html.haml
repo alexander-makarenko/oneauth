@@ -1,0 +1,12 @@
+%header
+  %nav.navbar.navbar-default.navbar.navbar-fixed-top
+    .container
+      .navbar-header
+        %button.navbar-toggle.collapsed{ type: 'button', 'aria-expanded': 'false', data: { toggle: 'collapse', target: '#navbar' } }
+          %span.sr-only Toggle navigation
+          - 3.times do
+            %span.icon-bar
+        = render 'layouts/logo'
+      #navbar.collapse.navbar-collapse
+        %ul.nav.navbar-nav.navbar-right
+          = render (signed_in? ? 'layouts/navlinks_user' : 'layouts/navlinks_visitor')

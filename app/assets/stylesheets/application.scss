@@ -1,0 +1,101 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin: 7em 0;
+}
+
+nav .navbar-right .glyphicon {
+  margin-right: .6em;    
+}
+
+#logo {
+  font-size: 140%;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+#account-dropdown #user-name {
+  float: left;
+  font-weight: bold;
+  padding-right: .4em;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #ccc;
+  border-top: 1px solid #aaa;
+  padding-top: 1em;
+  margin-top: 2em;
+}
+
+.btn {
+  min-width: 9.5em;
+  .glyphicon {
+    margin-right: .7em;
+  }
+}
+
+a:focus {
+  outline: none;
+}
+
+.field_with_errors {
+  @extend .has-error;
+}
+
+.alert:not(.validation-errors):not(.important) {
+  position: fixed;
+  z-index: 1000;
+  left: 50%;
+  top: 51px;
+  width: 20em;
+  margin-left: -10em;
+  padding: .5em 1em;
+  text-align: center;
+  border-top: none;
+  border-radius: 0 0 .5em .5em;
+}
+
+.vresize {
+  resize: vertical; 
+}
+
+// .ajax-in-progress {
+//   margin: 1.5em 0;
+//   img {
+//     margin-right: .8em;
+//   }
+// }
+
+ul.pagination {
+  margin: 0;
+}
+
+div.pagination {
+  margin: 1em 0 0;
+}
