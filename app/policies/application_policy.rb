@@ -56,4 +56,8 @@ class ApplicationPolicy
     def signed_in?
       !user.nil?
     end
+
+    def admin?
+      user.try(:admin?)
+    end
 end

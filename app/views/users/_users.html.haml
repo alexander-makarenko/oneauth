@@ -1,12 +1,13 @@
-%table.table.table-bordered.table-hover
-  %thead
-    %tr
-      %th ID
-      %th Name
-      %th Email
-      %th Registered On
-  %tbody
-    = render @users
+.table-responsive
+  %table.table.table-bordered.table-hover.text-nowrap
+    %thead
+      %tr
+        %th ID
+        %th Name
+        %th Email
+        %th Registered On
+    %tbody
+      = render @users
 
 .text-center
   = will_paginate @users

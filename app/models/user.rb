@@ -1,27 +1,17 @@
 class User < ApplicationRecord
-  attr_accessor :skip_password_validation
-  has_secure_password
+  has_many :logins
+  has_many :sites, through: :logins
 
   before_save :downcase_email
   before_create :assign_auth_digest
 
+  has_secure_password
+
   EMAIL_REGEX = /\A[\w+-]+(\.[\w-]+)*@[a-z\d-]+(\.[a-z\d-]+)*(\.[a-z]{2,4})\z/i
 
-  validates :first_name, presence: true, length: { maximum: 30 }
-  validates :last_name,  presence: true, length: { maximum: 30 }
-  validates :email,      presence: true, length: { maximum: 50 },
-                         uniqueness: { case_sensitive: false }, format: { with: EMAIL_REGEX }
-  
-
-  class << self
-    def digest(token)
-      Digest::SHA1.hexdigest(token.to_s)
-    end
-
-    def new_token
-      SecureRandom.urlsafe_base64
-    end
-  end
+  validates :first_name, :last_name, presence: true, length: { maximum: 30 }
+  validates :email, presence: true, length: { maximum: 50 },
+    uniqueness: { case_sensitive: false }, format: { with: EMAIL_REGEX }
 
   def auth_token
     @auth_token || (self.auth_token = self.class.new_token)
@@ -36,6 +26,14 @@ class User < ApplicationRecord
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def publish_changes
+    PublishUserChangesJob.perform_later(self)
+  end
+
+  def info
+    { first_name: self.first_name, last_name: self.last_name, email: self.email }
   end
 
   private

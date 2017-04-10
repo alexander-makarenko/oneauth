@@ -1,0 +1,8 @@
+%tr{ class: 'clickable-row', 'data-href': site_path(id: site.id) }
+  %td= site.id
+  %td= site.name
+  %td= site.domain
+  %td= site.secret_key
+  %td= site.user_update_callback
+  %td= site.auth_token_callback
+  %td= site.created_at.localtime.strftime('%b %-d %Y, %I:%M:%S %p')

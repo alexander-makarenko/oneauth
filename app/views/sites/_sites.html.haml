@@ -1,0 +1,16 @@
+.table-responsive
+  %table.table.table-bordered.table-hover.text-nowrap
+    %thead
+      %tr
+        %th ID
+        %th Name
+        %th Domain
+        %th Secret Key
+        %th Update Callback
+        %th Auth Token Callback
+        %th Added On
+    %tbody
+      = render @sites
+
+.text-center
+  = will_paginate @sites

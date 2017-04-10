@@ -1,8 +1,12 @@
 - if current_user.admin?
   %li
+    = link_to sites_path do
+      %span.glyphicon.glyphicon-list
+      Sites
+  %li
     = link_to users_path do
-      %span.glyphicon.glyphicon-list-alt
-      = t('v.layouts._header.nav_links.users')
+      %span.glyphicon.glyphicon-user
+      Users  
 
 %li.dropdown
   = link_to '#', class: 'dropdown-toggle', id: 'account-dropdown', data: { toggle: 'dropdown' }, role: 'button' do

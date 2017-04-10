@@ -1,7 +1,13 @@
 class SessionsController < ApplicationController
   before_action { authorize :session }
 
+  layout 'layouts/remote', only: :new_remote
+
   def new
+  end
+
+  def new_remote
+    @callback_url = Site.find_by(domain: request.referrer).try(:auth_token_callback)
   end
 
   def create
@@ -9,7 +15,6 @@ class SessionsController < ApplicationController
     
     if user.try(:authenticate, params[:password])
       sign_in(user, params[:keep_signed_in])
-
       redirect_to account_path
     else
       flash.now[:danger] = 'Invalid email or password'

@@ -1,18 +1,19 @@
 class UsersController < ApplicationController
 
   before_action { authorize User }
+  skip_before_action :verify_authenticity_token, only: [:authenticate_remote, :provide_info]
 
   def index
     @users = User.order(:id).paginate(page: params[:page])
   end
 
   def show
-    if params[:id] && current_user.admin?
-      @user = User.find_by(id: params[:id])
+    return @user = current_user unless params[:id]
+    if current_user.admin?
+      @user = User.find(params[:id])
       redirect_to account_path if @user == current_user
-      redirect_to root_path unless @user
     else
-      @user = current_user
+      raise Pundit::NotAuthorizedError
     end
   end
 
@@ -31,32 +32,48 @@ class UsersController < ApplicationController
   end
 
   def edit
-    if params[:id] && current_user.admin?
-      @user = User.find_by(id: params[:id])
+    return @user = current_user unless params[:id]
+    if current_user.admin?
+      @user = User.find(params[:id])
       redirect_to settings_path if @user == current_user
-      redirect_to root_path unless @user
     else
-      @user = current_user
+      raise Pundit::NotAuthorizedError
     end
   end
   
   def update
-    if params[:id] && current_user.admin?
-      @user = User.find_by(id: params[:id])      
-    else
-      @user = current_user
-    end
-
+    @user = params[:id] && current_user.admin? ? User.find(params[:id]) : current_user    
     if @user.update_attributes(user_params)
+      @user.publish_changes
       redirect_to @user, success: 'Settings updated'
     else
       render :edit
     end
   end
 
-  # def destroy
-  # end
+  def authenticate_remote
+    site = Site.find_by(secret_key: params[:secret_key])
+    @user = User.find_by(email: params[:user][:email]).try(:authenticate, params[:user][:password])
 
+    if site && @user
+      unless @login = Login.where(user_id: @user.id, site_id: site.id).first
+        @login = Login.create(user_id: @user.id, site_id: site.id)
+      end
+      render json: { auth_token: @login.auth_token }
+    else
+      render json: { error: 'Unauthorized' }, status: :unauthorized
+    end
+  end
+
+  def provide_info
+    @user = Login.find_by(auth_token: params[:auth_token]).try(:user)
+    if @user
+      render json: @user.info
+    else
+      render json: { error: 'Unauthorized' }, status: :unauthorized
+    end
+  end
+  
   private
   
     def user_params

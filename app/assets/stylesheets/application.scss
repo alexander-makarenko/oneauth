@@ -23,11 +23,15 @@ html {
 }
 
 body {
-  margin: 7em 0;
+  margin: 5em 0 7em;
 }
 
 nav .navbar-right .glyphicon {
-  margin-right: .6em;    
+  margin-right: .2em;
+}
+
+h2 {
+  margin-bottom: 1em;
 }
 
 #logo {
@@ -60,6 +64,10 @@ footer {
   }
 }
 
+.table td, .table th {
+  vertical-align: middle !important;
+}
+
 a:focus {
   outline: none;
 }
@@ -80,17 +88,6 @@ a:focus {
   border-top: none;
   border-radius: 0 0 .5em .5em;
 }
-
-.vresize {
-  resize: vertical; 
-}
-
-// .ajax-in-progress {
-//   margin: 1.5em 0;
-//   img {
-//     margin-right: .8em;
-//   }
-// }
 
 ul.pagination {
   margin: 0;

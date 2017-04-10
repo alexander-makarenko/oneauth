@@ -1,0 +1,21 @@
+%h2.text-center Site Details
+
+.col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3
+  .center-block
+    .form-group
+      %b Name
+      %p= @site.name
+    .form-group
+      %b Secret Key
+      %p= @site.secret_key
+    .form-group
+      %b Domain
+      %p= @site.domain    
+    .form-group
+      %b User Update Callback
+      %p= @site.user_update_callback
+    .form-group
+      %b Authentication Token Callback
+      %p= @site.auth_token_callback
+    .form-group
+      = link_to 'Edit', edit_site_path(@site), class: 'btn btn-primary'

@@ -15,9 +15,11 @@ class UserPolicy < ApplicationPolicy
     admin?
   end
 
-  private
+  def authenticate_remote?
+    true
+  end
 
-    def admin?
-      user.try(:admin?)
-    end  
+  def provide_info?
+    true
+  end
 end

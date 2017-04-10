@@ -1,4 +1,8 @@
 class SessionPolicy < ApplicationPolicy
+  def new_remote?
+    true
+  end
+
   def create?
     !signed_in?
   end

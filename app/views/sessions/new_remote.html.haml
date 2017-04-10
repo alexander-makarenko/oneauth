@@ -1,0 +1,20 @@
+- if @callback_url
+  %h2.text-center Log In
+
+.col-sm-6.col-sm-offset-3.col-md-4.col-md-offset-4
+  - unless @callback_url
+    .text-center
+      %h3
+        Your site is not registered for authentication through this service. Please
+        = link_to 'contact', root_path
+        the administrator.
+  - else
+    = form_tag @callback_url, class: 'center-block' do |f|
+      .form-group
+        = label_tag :email
+        = text_field_tag :email, nil, class: 'form-control'
+      .form-group
+        = label_tag :password
+        = password_field_tag :password, nil, class: 'form-control'
+      .form-group.text-center
+        = submit_tag 'Log In', class: 'btn btn-default btn-primary'

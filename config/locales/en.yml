@@ -19,6 +19,40 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
-  pundit:
+en:  
+  activerecord:
+    attributes:
+      site:
+        name: "name"
+        domain: "domain"
+        user_update_callback: "user update callback"
+        auth_token_callback: "authentication token callback"
+      user:
+        first_name: "first name"
+        last_name: "last name"
+        email: "email"
+        password: "password"
+        password_confirmation: "confirmation"
+    errors:
+      models:
+        site:
+          attributes:
+            name:
+              blank: "is required"
+        user:
+          attributes:
+            first_name:
+              blank: "is required"
+            last_name:
+              blank: "is required"
+            email:
+              blank: "is required"
+            password:
+              blank: "is required"
+              invalid: "is incorrect"
+              too_short: "must be at least %{count} characters long"
+            password_confirmation:
+              blank: "is required"
+              confirmation: "does not match the %{attribute}"
+pundit:
     default: "You are not authorized to perform this action"

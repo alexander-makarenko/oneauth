@@ -40,4 +40,10 @@ function removeFlash() {
 
 $(document).on('turbolinks:load', function() {
   animateFlash();
+
+  // make rows in certain tables clickables
+  $('table .clickable-row').off('click').on('click', function() {
+    console.log('clicked');
+    window.document.location = $(this).data('href');
+  });
 });
